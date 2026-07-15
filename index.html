@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Synax Baba Project</title>
+    <title>Reck Project</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;800;900&family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         @keyframes cyber-glitch {
             0% { clip-path: inset(40% 0 61% 0); transform: skew(0.3deg); }
@@ -37,36 +38,14 @@
             background-size: 200% 200%;
             animation: background-pulse 10s ease infinite;
             color: #fff;
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             overflow-x: hidden;
         }
 
         .shake-hover:hover {
             animation: neon-shake 0.2s linear infinite;
-            box-shadow: 0 0 25px #6366f1, inset 0 0 10px #6366f1;
-            border-color: #818cf8;
-        }
-
-        .glitch-title {
-            position: relative;
-        }
-        .glitch-title::before, .glitch-title::after {
-            content: "SYNAX BABA";
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: #030206;
-        }
-        .glitch-title::before {
-            left: 2px;
-            text-shadow: -2px 0 #ff00c1;
-            clip: rect(44px, 450px, 56px, 0);
-            animation: cyber-glitch 5s infinite linear alternate-reverse;
-        }
-        .glitch-title::after {
-            left: -2px;
-            text-shadow: -2px 0 #00fff9, 0 2px #ff00c1;
-            clip: rect(85px, 450px, 140px, 0);
-            animation: cyber-glitch 5s infinite linear alternate-reverse;
+            box-shadow: 0 0 25px #a855f7, inset 0 0 10px #a855f7;
+            border-color: #c084fc;
         }
 
         .flip-hover:hover {
@@ -74,8 +53,8 @@
         }
 
         .grid-tech {
-            background-image: linear-gradient(rgba(99, 102, 241, 0.05) 1.5px, transparent 1.5px),
-                              linear-gradient(90deg, rgba(99, 102, 241, 0.05) 1.5px, transparent 1.5px);
+            background-image: linear-gradient(rgba(168, 85, 247, 0.05) 1.5px, transparent 1.5px),
+                              linear-gradient(90deg, rgba(168, 85, 247, 0.05) 1.5px, transparent 1.5px);
             background-size: 30px 30px;
         }
 
@@ -83,249 +62,104 @@
             position: fixed;
             width: 500px;
             height: 500px;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.1) 0%, transparent 70%);
             border-radius: 50%;
             pointer-events: none;
             z-index: 1;
             transform: translate(-50%, -50%);
             transition: transform 0.05s ease-out;
+            display: none;
         }
 
-        .reveal-card {
+        .reveal-left {
             opacity: 0;
-            transform: translateY(100px) rotateX(45deg);
-            transition: all 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
+            transform: translateX(-50px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .reveal-card.active {
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .revealed {
             opacity: 1;
-            transform: translateY(0) rotateX(0deg);
+            transform: translate(0);
         }
     </style>
 </head>
 <body class="grid-tech min-h-screen pb-12">
 
-    <div id="mouse-glow" class="glow-node"></div>
+    <div id="glow-cursor" class="glow-node"></div>
 
-    <header class="fixed w-full z-50 px-6 py-4 flex justify-between items-center backdrop-blur-md border-b border-indigo-900/30 bg-black/40">
-        <div class="text-xl font-black tracking-widest text-white">
-            SYNAX<span class="text-indigo-500">_BABA</span>
-        </div>
-        <a href="https://t.me/ReckOpssYonlendirme" target="_blank" class="shake-hover px-6 py-2.5 bg-indigo-600 border border-indigo-400 rounded-lg text-xs font-bold tracking-widest transition-all">
-            TELEGRAM KANALI
-        </a>
-    </header>
-
-    <section class="h-screen flex flex-col items-center justify-center text-center px-6 relative">
-        <div class="space-y-4 max-w-4xl z-10">
-            <span class="inline-block text-[10px] uppercase bg-indigo-950/80 border border-indigo-500/40 text-indigo-300 px-4 py-1.5 rounded-full tracking-[0.2em] animate-pulse">
-                SYS_STATUS: OPERATIONAL
-            </span>
-            <h1 class="glitch-title text-5xl md:text-8xl font-black tracking-tighter text-white">
-                SYNAX BABA
-            </h1>
-            <p class="text-gray-400 text-sm md:text-base max-w-md mx-auto py-2">
-                Sıradanlığı unutun. Kernel optimizasyonu ve gelişmiş bellek kontrol üniteleriyle performansı zirveye taşıyın.
-            </p>
-            <div class="pt-4">
-                <a href="#solutions" class="shake-hover px-10 py-4 bg-indigo-600 border border-indigo-400 rounded-xl font-black text-xs uppercase tracking-[0.15em] transition-all">
-                    SİSTEME GİRİŞ YAP
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section id="solutions" class="py-12 px-6 max-w-6xl mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            
-            <div class="reveal-card flip-hover bg-[#0b0a11]/90 border border-indigo-900/40 p-8 rounded-2xl relative overflow-hidden group cursor-pointer" style="transition-delay: 0.1s;">
-                <div class="absolute top-0 right-0 w-24 h-24 bg-indigo-500/10 rounded-full blur-2xl group-hover:bg-indigo-500/30 transition-all"></div>
-                <div class="text-indigo-400 text-4xl mb-6"><i class="fa-solid fa-microchip"></i></div>
-                <h3 class="text-xl font-bold mb-2 tracking-wide">01 // CORE ENGINE</h3>
-                <p class="text-xs text-gray-400 leading-relaxed">Derin iş parçacığı yönetimi ve özel mikroişlemci mimarisi ile kusursuz çalışma.</p>
-            </div>
-
-            <div class="reveal-card flip-hover bg-[#0b0a11]/90 border border-indigo-900/40 p-8 rounded-2xl relative overflow-hidden group cursor-pointer" style="transition-delay: 0.2s;">
-                <div class="absolute top-0 right-0 w-24 h-24 bg-indigo-500/10 rounded-full blur-2xl group-hover:bg-indigo-500/30 transition-all"></div>
-                <div class="text-indigo-400 text-4xl mb-6"><i class="fa-solid fa-shield-halved"></i></div>
-                <h3 class="text-xl font-bold mb-2 tracking-wide">02 // CYBER GUARD</h3>
-                <p class="text-xs text-gray-400 leading-relaxed">İmza tabanlı koruma kalkanları ve gerçek zamanlı işlem doğrulama.</p>
-            </div>
-
-            <div class="reveal-card flip-hover bg-[#0b0a11]/90 border border-indigo-900/40 p-8 rounded-2xl relative overflow-hidden group cursor-pointer" style="transition-delay: 0.3s;">
-                <div class="absolute top-0 right-0 w-24 h-24 bg-indigo-500/10 rounded-full blur-2xl group-hover:bg-indigo-500/30 transition-all"></div>
-                <div class="text-indigo-400 text-4xl mb-6"><i class="fa-solid fa-gauge-high"></i></div>
-                <h3 class="text-xl font-bold mb-2 tracking-wide">03 // LATENCY ULTRA</h3>
-                <p class="text-xs text-gray-400 leading-relaxed">Arabellek temizleyici ve anlık girdi optimizasyon modülleri.</p>
-            </div>
-
-            <div class="reveal-card flip-hover bg-[#0b0a11]/90 border border-indigo-900/40 p-8 rounded-2xl relative overflow-hidden group cursor-pointer" style="transition-delay: 0.4s;">
-                <div class="absolute top-0 right-0 w-24 h-24 bg-indigo-500/10 rounded-full blur-2xl group-hover:bg-indigo-500/30 transition-all"></div>
-                <div class="text-indigo-400 text-4xl mb-6"><i class="fa-solid fa-network-wired"></i></div>
-                <h3 class="text-xl font-bold mb-2 tracking-wide">04 // NETWORK FLOW</h3>
-                <p class="text-xs text-gray-400 leading-relaxed">Giden paket trafiğini optimize eden akıllı yönlendirme protokolü.</p>
-            </div>
-
-            <div class="reveal-card flip-hover bg-[#0b0a11]/90 border border-indigo-900/40 p-8 rounded-2xl relative overflow-hidden group cursor-pointer" style="transition-delay: 0.5s;">
-                <div class="absolute top-0 right-0 w-24 h-24 bg-indigo-500/10 rounded-full blur-2xl group-hover:bg-indigo-500/30 transition-all"></div>
-                <div class="text-indigo-400 text-4xl mb-6"><i class="fa-solid fa-cube"></i></div>
-                <h3 class="text-xl font-bold mb-2 tracking-wide">05 // BUFFER INTEGRITY</h3>
-                <p class="text-xs text-gray-400 leading-relaxed">Hafıza sızıntılarını gerçek zamanlı onaran dinamik bellek arayüzü.</p>
-            </div>
-
-            <div class="reveal-card flip-hover bg-[#0b0a11]/90 border border-indigo-900/40 p-8 rounded-2xl relative overflow-hidden group cursor-pointer" style="transition-delay: 0.6s;">
-                <div class="absolute top-0 right-0 w-24 h-24 bg-indigo-500/10 rounded-full blur-2xl group-hover:bg-indigo-500/30 transition-all"></div>
-                <div class="text-indigo-400 text-4xl mb-6"><i class="fa-solid fa-terminal"></i></div>
-                <h3 class="text-xl font-bold mb-2 tracking-wide">06 // SHELL CONSOLE</h3>
-                <p class="text-xs text-gray-400 leading-relaxed">Sistem mühendisleri için özelleştirilebilir terminal otomasyonları.</p>
-            </div>
-
-        </div>
-    </section>
-
-    <script>
-        const glow = document.getElementById('mouse-glow');
-        document.addEventListener('mousemove', (e) => {
-            if (window.innerWidth > 768) {
-                glow.style.left = e.clientX + 'px';
-                glow.style.top = e.clientY + 'px';
-            }
-        });
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.reveal-card').forEach(el => {
-            observer.observe(el);
-        });
-    </script>
-</body>
-</html>
-    </footer>
-
-    <script>
-        // Scroll ile animasyonları tetikle
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                }
-            });
-        }, { threshold: 0.2 });
-
-        document.querySelectorAll('.stagger-reveal').forEach(el => observer.observe(el));
-        
-        // Mouse takip
-        document.addEventListener('mousemove', (e) => {
-            const x = e.clientX / window.innerWidth;
-            const y = e.clientY / window.innerHeight;
-            document.body.style.backgroundPosition = `${x * 100}% ${y * 100}%`;
-        });
-    </script>
-</body>
-</html>
-    <!-- HEADER (PC'de Geniş, Mobilde Minimal) -->
+    <!-- HEADER -->
     <header class="fixed top-0 left-0 w-full z-50 bg-[#050508]/75 backdrop-blur-xl border-b border-white/5 px-6 md:px-12 py-5 flex justify-between items-center transition-all duration-300">
         <div class="text-2xl md:text-3xl font-orbitron font-black tracking-widest text-white">
             RECK<span class="text-purple-500 animate-pulse">_PROJECT</span>
         </div>
         
-        <!-- PC Menü -->
         <nav class="hidden md:flex items-center space-x-8 font-semibold text-sm tracking-wider">
             <a href="#home" class="hover:text-purple-500 transition-colors duration-200">ANA SAYFA</a>
-            <a href="#store" class="hover:text-purple-500 transition-colors duration-200">MAĞAZA</a>
             <a href="#features" class="hover:text-purple-500 transition-colors duration-200">AVANTAJLAR</a>
             <a href="#stats" class="hover:text-purple-500 transition-colors duration-200">İSTATİSTİKLER</a>
         </nav>
 
         <div class="hidden md:flex items-center space-x-4">
-            <a href="#store" class="neon-btn bg-purple-600 text-white text-xs font-bold px-6 py-2.5 rounded-lg border border-purple-400/30">
-                GİRİŞ YAP
+            <a href="https://t.me/ReckOpssYonlendirme" target="_blank" class="shake-hover bg-purple-600 text-white text-xs font-bold px-6 py-2.5 rounded-lg border border-purple-400/30">
+                TELEGRAM KANALI
             </a>
         </div>
 
-        <!-- Mobil Hamburger -->
         <button id="menu-btn" class="md:hidden text-white text-2xl focus:outline-none">
             <i class="fa-solid fa-bars-staggered text-purple-500"></i>
         </button>
     </header>
 
-    <!-- MOBİL MENÜ (Slide-in) -->
+    <!-- MOBİL MENÜ -->
     <div id="mobile-menu" class="fixed inset-0 bg-[#050508]/98 z-50 translate-x-full transition-transform duration-500 ease-in-out flex flex-col justify-center items-center space-y-8 text-xl font-orbitron tracking-widest">
         <button id="close-btn" class="absolute top-6 right-6 text-white text-3xl">
             <i class="fa-solid fa-xmark text-purple-500"></i>
         </button>
         <a href="#home" class="hover:text-purple-500 transition">ANA SAYFA</a>
-        <a href="#store" class="hover:text-purple-500 transition">MAĞAZA</a>
         <a href="#features" class="hover:text-purple-500 transition">AVANTAJLAR</a>
         <a href="#stats" class="hover:text-purple-500 transition">İSTATİSTİKLER</a>
+        <a href="https://t.me/ReckOpssYonlendirme" target="_blank" class="px-6 py-2.5 bg-purple-600 text-white rounded-lg text-sm font-bold">TELEGRAM</a>
     </div>
 
-    <!-- HERO SECTION (Havada Süzülen Elementler) -->
+    <!-- HERO SECTION -->
     <section id="home" class="relative min-h-screen flex items-center justify-center px-6 pt-24 overflow-hidden">
         <div class="max-w-6xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center z-10">
             
-            <!-- Sol Taraf Metinler (PC'de soldan süzülerek gelir) -->
             <div class="reveal-left text-center md:text-left space-y-6">
                 <div class="inline-flex items-center gap-2 bg-purple-950/40 text-purple-400 text-xs font-semibold px-4 py-1.5 rounded-full border border-purple-500/30 tracking-widest uppercase">
-                    <span class="w-2 h-2 rounded-full bg-green-500 animate-ping"></span> Korumalar Devre Dışı
+                    <span class="w-2 h-2 rounded-full bg-green-500 animate-ping"></span> Hazır ol dostum
                 </div>
                 <h1 class="text-4xl sm:text-5xl md:text-6xl font-orbitron font-black text-white leading-none">
                     OYUNUN <br>
                     <span class="bg-gradient-to-r from-purple-400 via-fuchsia-500 to-indigo-500 bg-clip-text text-transparent">KURALINI YAZ</span>
                 </h1>
                 <p class="text-gray-400 text-sm md:text-base max-w-md leading-relaxed">
-                    Yapay zeka şablonlarından arındırılmış, üst düzey güvenlik odaklı hile arayüzü ve güvenli ticaret havuzu. Reck Project ile sınırları sen belirlersin.
+                    Best Hack Telegrams: ReckOpss
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                    <a href="#store" class="neon-btn bg-purple-600 text-white font-bold py-4 px-8 rounded-xl transition duration-300 text-center text-sm tracking-wider">
-                        PAZARI KEŞFET <i class="fa-solid fa-arrow-trend-up ml-2"></i>
+                    <a href="https://t.me/ReckOpssYonlendirme" target="_blank" class="shake-hover bg-purple-600 text-white font-bold py-4 px-8 rounded-xl transition duration-300 text-center text-sm tracking-wider">
+                        KANALA KATIL <i class="fa-solid fa-arrow-trend-up ml-2"></i>
                     </a>
-                    <a href="#sell" class="bg-white/5 hover:bg-white/10 text-white font-bold py-4 px-8 rounded-xl border border-white/10 transition duration-300 text-center text-sm tracking-wider">
-                        İLAN OLUŞTUR
-                    </a>
-                </div>
-            </div>
-
-            <!-- Sağ Taraf Hareketli 3D Görünümlü Kart Mockup (PC'de sağdan gelir) -->
-            <div class="reveal-right flex justify-center items-center relative">
-                <!-- Arka plan renkli patlama -->
-                <div class="absolute w-72 h-72 bg-purple-600/20 rounded-full filter blur-[80px] -z-10 animate-pulse"></div>
-                
-                <!-- Siber Konsol Kartı (Hover edildiğinde 3D tilt efekti hissi verir) -->
-                <div class="cyber-card w-full max-w-sm rounded-2xl p-6 border border-white/10 relative overflow-hidden">
-                    <div class="flex justify-between items-center mb-6">
-                        <div class="flex space-x-1.5">
-                            <span class="w-3 h-3 rounded-full bg-red-500"></span>
-                            <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
-                            <span class="w-3 h-3 rounded-full bg-green-500"></span>
-                        </div>
-                        <span class="text-xs font-orbitron text-purple-400 tracking-wider">RECK_BYPASS_V4.exe</span>
-                    </div>
-                    <div class="bg-black/50 rounded-lg p-4 font-mono text-xs text-green-400 space-y-2 border border-white/5 mb-4">
-                        <p>> Initializing bypass system...</p>
-                        <p class="text-purple-400">> Hooking game process... [OK]</p>
-                        <p>> Status: <span class="text-green-500 font-bold animate-pulse">UNDETECTED</span></p>
-                    </div>
-                    <div class="flex justify-between items-center">
-                        <span class="text-xs text-gray-500">Güvenlik Seviyesi</span>
-                        <span class="text-xs bg-purple-500/20 text-purple-300 px-2.5 py-0.5 rounded-full border border-purple-500/30">Maksimum</span>
-                    </div>
                 </div>
             </div>
 
         </div>
     </section>
 
-    <!-- İSTATİSTİKLER (Sayı Sayma Animasyonu Eklenebilir) -->
+    <!-- İSTATİSTİKLER -->
     <section id="stats" class="py-16 border-y border-white/5 bg-[#08080c]/50">
         <div class="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div class="reveal-up space-y-2">
-                <h3 class="text-3xl md:text-4xl font-orbitron font-extrabold text-white">15K+</h3>
+                <h3 class="text-3xl md:text-4xl font-orbitron font-extrabold text-white">0</h3>
                 <p class="text-xs md:text-sm text-gray-500 uppercase tracking-widest">Başarılı Satış</p>
             </div>
             <div class="reveal-up space-y-2">
@@ -337,76 +171,56 @@
                 <p class="text-xs md:text-sm text-gray-500 uppercase tracking-widest">Ban Riski (VIP)</p>
             </div>
             <div class="reveal-up space-y-2">
-                <h3 class="text-3xl md:text-4xl font-orbitron font-extrabold text-purple-500">2 Milyon+</h3>
+                <h3 class="text-3xl md:text-4xl font-orbitron font-extrabold text-purple-500">0</h3>
                 <p class="text-xs md:text-sm text-gray-500 uppercase tracking-widest">İşlem Hacmi</p>
             </div>
         </div>
     </section>
 
-    <!-- MAĞAZA (İlan Kartları - Hover Efektli) -->
-    <section id="store" class="py-24 px-6 max-w-6xl mx-auto">
-        <div class="reveal-up mb-16 text-center md:text-left flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <div>
-                <span class="text-xs font-orbitron text-purple-500 tracking-widest uppercase">Premium Pazar</span>
-                <h2 class="text-3xl md:text-4xl font-orbitron font-black text-white mt-1">GÜNCEL YAZILIMLAR</h2>
-            </div>
-            <p class="text-gray-400 text-sm max-w-xs">
-                Sistemimizdeki tüm ilanlar otomatik kontrol edilmekte ve güncellenmektedir.
-            </p>
-        </div>
-
-        <!-- Ürün Kartları Grid Yapısı -->
+    <!-- AVANTAJLAR -->
+    <section id="features" class="py-24 px-6 max-w-6xl mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             
-            <!-- Kart 1 -->
-            <div class="cyber-card rounded-2xl p-6 reveal-up relative overflow-hidden">
-                <div class="flex justify-between items-start mb-6">
-                    <span class="bg-green-500/10 text-green-400 text-xs font-bold px-3 py-1 rounded-md border border-green-500/20 font-orbitron">ACTIVE</span>
-                    <span class="text-sm font-semibold text-purple-400">FPS</span>
-                </div>
-                <h3 class="text-xl font-bold text-white mb-2">Reck Apex Elite</h3>
-                <p class="text-gray-400 text-xs mb-6 leading-relaxed">Aimbot, ESP, Recoil Control ve HWID Spoofer entegreli komple paket.</p>
-                <div class="flex justify-between items-center border-t border-white/5 pt-4">
-                    <div>
-                        <span class="text-[10px] text-gray-500 block uppercase">Fiyat</span>
-                        <span class="text-xl font-extrabold text-white">₺250 <span class="text-xs font-normal text-gray-400">/ haftalık</span></span>
-                    </div>
-                    <button class="neon-btn bg-purple-600 text-white text-xs font-bold px-4 py-2.5 rounded-lg">Satın Al</button>
-                </div>
+            <div class="reveal-up flip-hover bg-[#0b0a11]/90 border border-purple-900/40 p-8 rounded-2xl relative overflow-hidden group cursor-pointer" style="transition-delay: 0.1s;">
+                <div class="absolute top-0 right-0 w-24 h-24 bg-purple-500/10 rounded-full blur-2xl group-hover:bg-purple-500/30 transition-all"></div>
+                <div class="text-purple-400 text-4xl mb-6"><i class="fa-solid fa-microchip"></i></div>
+                <h3 class="text-xl font-bold mb-2 tracking-wide">01 // CORE ENGINE</h3>
+                <p class="text-xs text-gray-400 leading-relaxed">Derin iş parçacığı yönetimi ve özel mikroişlemci mimarisi ile kusursuz çalışma.</p>
             </div>
 
-            <!-- Kart 2 -->
-            <div class="cyber-card rounded-2xl p-6 reveal-up relative overflow-hidden">
-                <div class="flex justify-between items-start mb-6">
-                    <span class="bg-green-500/10 text-green-400 text-xs font-bold px-3 py-1 rounded-md border border-green-500/20 font-orbitron">ACTIVE</span>
-                    <span class="text-sm font-semibold text-purple-400">ROBLOX</span>
-                </div>
-                <h3 class="text-xl font-bold text-white mb-2">Reck Blox Multi-Executor</h3>
-                <p class="text-gray-400 text-xs mb-6 leading-relaxed">Tüm güncel scriptleri sorunsuz çalıştırabilen, çökmeyen özel mobil & PC executor.</p>
-                <div class="flex justify-between items-center border-t border-white/5 pt-4">
-                    <div>
-                        <span class="text-[10px] text-gray-500 block uppercase">Fiyat</span>
-                        <span class="text-xl font-extrabold text-white">₺120 <span class="text-xs font-normal text-gray-400">/ aylık</span></span>
-                    </div>
-                    <button class="neon-btn bg-purple-600 text-white text-xs font-bold px-4 py-2.5 rounded-lg">Satın Al</button>
-                </div>
+            <div class="reveal-up flip-hover bg-[#0b0a11]/90 border border-purple-900/40 p-8 rounded-2xl relative overflow-hidden group cursor-pointer" style="transition-delay: 0.2s;">
+                <div class="absolute top-0 right-0 w-24 h-24 bg-purple-500/10 rounded-full blur-2xl group-hover:bg-purple-500/30 transition-all"></div>
+                <div class="text-purple-400 text-4xl mb-6"><i class="fa-solid fa-shield-halved"></i></div>
+                <h3 class="text-xl font-bold mb-2 tracking-wide">02 // CYBER GUARD</h3>
+                <p class="text-xs text-gray-400 leading-relaxed">İmza tabanlı koruma kalkanları ve gerçek zamanlı işlem doğrulama.</p>
             </div>
 
-            <!-- Kart 3 -->
-            <div class="cyber-card rounded-2xl p-6 reveal-up relative overflow-hidden">
-                <div class="flex justify-between items-start mb-6">
-                    <span class="bg-blue-500/10 text-blue-400 text-xs font-bold px-3 py-1 rounded-md border border-blue-500/20 font-orbitron">HESAP</span>
-                    <span class="text-sm font-semibold text-purple-400">VALORANT</span>
-                </div>
-                <h3 class="text-xl font-bold text-white mb-2">Random Skinli Hesaplar</h3>
-                <p class="text-gray-400 text-xs mb-6 leading-relaxed">En az 20-100 arası skin garantili, ilk e-posta teslimatlı TR hesaplar.</p>
-                <div class="flex justify-between items-center border-t border-white/5 pt-4">
-                    <div>
-                        <span class="text-[10px] text-gray-500 block uppercase">Fiyat</span>
-                        <span class="text-xl font-extrabold text-white">₺180 <span class="text-xs font-normal text-gray-400">/ tek sefer</span></span>
-                    </div>
-                    <button class="neon-btn bg-purple-600 text-white text-xs font-bold px-4 py-2.5 rounded-lg">Satın Al</button>
-                </div>
+            <div class="reveal-up flip-hover bg-[#0b0a11]/90 border border-purple-900/40 p-8 rounded-2xl relative overflow-hidden group cursor-pointer" style="transition-delay: 0.3s;">
+                <div class="absolute top-0 right-0 w-24 h-24 bg-purple-500/10 rounded-full blur-2xl group-hover:bg-purple-500/30 transition-all"></div>
+                <div class="text-purple-400 text-4xl mb-6"><i class="fa-solid fa-gauge-high"></i></div>
+                <h3 class="text-xl font-bold mb-2 tracking-wide">03 // LATENCY ULTRA</h3>
+                <p class="text-xs text-gray-400 leading-relaxed">Arabellek temizleyici ve anlık girdi optimizasyon modülleri.</p>
+            </div>
+
+            <div class="reveal-up flip-hover bg-[#0b0a11]/90 border border-purple-900/40 p-8 rounded-2xl relative overflow-hidden group cursor-pointer" style="transition-delay: 0.4s;">
+                <div class="absolute top-0 right-0 w-24 h-24 bg-purple-500/10 rounded-full blur-2xl group-hover:bg-purple-500/30 transition-all"></div>
+                <div class="text-purple-400 text-4xl mb-6"><i class="fa-solid fa-network-wired"></i></div>
+                <h3 class="text-xl font-bold mb-2 tracking-wide">04 // NETWORK FLOW</h3>
+                <p class="text-xs text-gray-400 leading-relaxed">Giden paket trafiğini optimize eden akıllı yönlendirme protokolü.</p>
+            </div>
+
+            <div class="reveal-up flip-hover bg-[#0b0a11]/90 border border-purple-900/40 p-8 rounded-2xl relative overflow-hidden group cursor-pointer" style="transition-delay: 0.5s;">
+                <div class="absolute top-0 right-0 w-24 h-24 bg-purple-500/10 rounded-full blur-2xl group-hover:bg-purple-500/30 transition-all"></div>
+                <div class="text-purple-400 text-4xl mb-6"><i class="fa-solid fa-cube"></i></div>
+                <h3 class="text-xl font-bold mb-2 tracking-wide">05 // BUFFER INTEGRITY</h3>
+                <p class="text-xs text-gray-400 leading-relaxed">Hafıza sızıntılarını gerçek zamanlı onaran dinamik bellek arayüzü.</p>
+            </div>
+
+            <div class="reveal-up flip-hover bg-[#0b0a11]/90 border border-purple-900/40 p-8 rounded-2xl relative overflow-hidden group cursor-pointer" style="transition-delay: 0.6s;">
+                <div class="absolute top-0 right-0 w-24 h-24 bg-purple-500/10 rounded-full blur-2xl group-hover:bg-purple-500/30 transition-all"></div>
+                <div class="text-purple-400 text-4xl mb-6"><i class="fa-solid fa-terminal"></i></div>
+                <h3 class="text-xl font-bold mb-2 tracking-wide">06 // SHELL CONSOLE</h3>
+                <p class="text-xs text-gray-400 leading-relaxed">Sistem mühendisleri için özelleştirilebilir terminal otomasyonları.</p>
             </div>
 
         </div>
@@ -418,12 +232,10 @@
         <p>This software is developed strictly for educational/testing purposes.</p>
     </footer>
 
-    <!-- JS ENTEGRASYONU VE ULTRA ANIMASYONLAR -->
+    <!-- SCRIPTS -->
     <script>
-        // 1. Mouse Takip Eden Neon Glow (PC için özel, mobilde çalışmaz ve kasmayı önler)
         const glowCursor = document.getElementById('glow-cursor');
         
-        // Cihaz algılama (PC ise cursor animasyonunu aktif et)
         if (window.innerWidth > 768) {
             glowCursor.style.display = 'block';
             document.addEventListener('mousemove', (e) => {
@@ -432,7 +244,6 @@
             });
         }
 
-        // 2. Mobil Hamburger Menü Kontrolleri
         const menuBtn = document.getElementById('menu-btn');
         const closeBtn = document.getElementById('close-btn');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -445,21 +256,19 @@
             mobileMenu.classList.add('translate-x-full');
         });
 
-        // Linklere tıklandığında menüyü kapat
         document.querySelectorAll('#mobile-menu a').forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.add('translate-x-full');
             });
         });
 
-        // 3. Scroll Reveal (Aşağı kaydırdıkça havadan uçarak gelen kartlar)
         const revealElements = () => {
             const reveals = document.querySelectorAll('.reveal-left, .reveal-right, .reveal-up');
             const windowHeight = window.innerHeight;
 
             reveals.forEach(el => {
                 const elementTop = el.getBoundingClientRect().top;
-                const elementVisible = 120; // 120px kala animasyonu tetikle
+                const elementVisible = 120;
 
                 if (elementTop < windowHeight - elementVisible) {
                     el.classList.add('revealed');
@@ -468,7 +277,6 @@
         };
 
         window.addEventListener('scroll', revealElements);
-        // İlk yüklemede de çalıştır
         window.addEventListener('load', revealElements);
     </script>
 </body>
