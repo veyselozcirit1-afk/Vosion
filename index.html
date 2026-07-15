@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>upVirüS Antivirus — Advanced Protection</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="theme-toggle" id="themeToggle">🌙</div>
+<div class="lang-switcher" id="langSwitcher">
+  <button data-lang="en">EN</button>
+  <button data-lang="tr">TR</button>
+  <button data-lang="de">DE</button>
+  <button data-lang="fr">FR</button>
+  <button data-lang="es">ES</button>
+  <button data-lang="ru">RU</button>
+</div>
+
+<div class="container">
+  <aside class="sidebar">
+    <div class="logo">
+      <span class="logo-icon">⚡</span>
+      <span class="logo-text">upVirüS</span>
+    </div>
+    <nav class="nav">
+      <a href="#" class="nav-item active" data-section="dashboard" data-i18n="nav_dashboard">Dashboard</a>
+      <a href="#" class="nav-item" data-section="scan" data-i18n="nav_scan">Scan</a>
+      <a href="#" class="nav-item" data-section="threats" data-i18n="nav_threats">Threats</a>
+      <a href="#" class="nav-item" data-section="quarantine" data-i18n="nav_quarantine">Quarantine</a>
+      <a href="#" class="nav-item" data-section="reports" data-i18n="nav_reports">Reports</a>
+      <a href="#" class="nav-item" data-section="settings" data-i18n="nav_settings">Settings</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="version" data-i18n="version">v3.2.1</div>
+      <div class="status-badge" id="licenseStatus">
+        <span class="badge-dot active"></span>
+        <span data-i18n="status_active">Active</span>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <!-- DASHBOARD -->
+    <section class="section active" id="dashboard">
+      <header class="section-header">
+        <h1 data-i18n="dashboard_title">Protection Dashboard</h1>
+        <p data-i18n="dashboard_desc">System status and real-time protection overview</p>
+      </header>
+
+      <div class="grid-2">
+        <div class="card status-card safe">
+          <div class="status-icon">✓</div>
+          <h2 data-i18n="status_safe">System Safe</h2>
+          <p class="status-time" id="lastScanTime">Last scan: 2 hours ago</p>
+        </div>
+        <div class="card protection-card">
+          <h3 data-i18n="protection_level">Protection Level</h3>
+          <div class="progress-ring" id="protectionRing">
+            <svg viewBox="0 0 120 120">
+              <circle cx="60" cy="60" r="54" class="progress-bg"></circle>
+              <circle cx="60" cy="60" r="54" class="progress-fill" style="--progress: 98"></circle>
+            </svg>
+            <div class="progress-text">98%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="card stat-card">
+          <div class="stat-icon threat">⚠️</div>
+          <div class="stat-content">
+            <div class="stat-value" id="threatCount">0</div>
+            <div class="stat-label" data-i18n="stat_threats">Threats Detected</div>
+          </div>
+        </div>
+        <div class="card stat-card">
+          <div class="stat-icon quarantine">🔒</div>
+          <div class="stat-content">
+            <div class="stat-value" id="quarCount">12</div>
+            <div class="stat-label" data-i18n="stat_quarantine">Quarantined</div>
+          </div>
+        </div>
+        <div class="card stat-card">
+          <div class="stat-icon scan">🔍</div>
+          <div class="stat-content">
+            <div class="stat-value" id="scanCount">847</div>
+            <div class="stat-label" data-i18n="stat_scans">Total Scans</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 data-i18n="active_protection">Active Protection</h3>
+        <div class="protection-list">
+          <div class="protection-item">
+            <span class="protection-toggle on"></span>
+            <span data-i18n="protect_realtime">Real-time scanning</span>
+          </div>
+          <div class="protection-item">
+            <span class="protection-toggle on"></span>
+            <span data-i18n="protect_email">Email protection</span>
+          </div>
+          <div class="protection-item">
+            <span class="protection-toggle on"></span>
+            <span data-i18n="protect_web">Web protection</span>
+          </div>
+          <div class="protection-item">
+            <span class="protection-toggle on"></span>
+            <span data-i18n="protect_firewall">Firewall</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 data-i18n="recent_activity">Recent Activity</h3>
+        <div class="activity-log">
+          <div class="log-entry">
+            <span class="log-time">14:23</span>
+            <span class="log-text" data-i18n="log_scan">System scan completed</span>
+            <span class="log-status ok">OK</span>
+          </div>
+          <div class="log-entry">
+            <span class="log-time">12:45</span>
+            <span class="log-text" data-i18n="log_update">Threat definitions updated</span>
+            <span class="log-status ok">OK</span>
+          </div>
+          <div class="log-entry">
+            <span class="log-time">09:12</span>
+            <span class="log-text" data-i18n="log_blocked">Malware blocked</span>
+            <span class="log-status blocked">BLOCKED</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCAN -->
+    <section class="section" id="scan">
+      <header class="section-header">
+        <h1 data-i18n="scan_title">System Scan</h1>
+        <p data-i18n="scan_desc">Run comprehensive threat detection</p>
+      </header>
+
+      <div class="scan-options">
+        <button class="btn btn-primary" id="quickScan" data-i18n="scan_quick">Quick Scan (5 min)</button>
+        <button class="btn btn-secondary" id="fullScan" data-i18n="scan_full">Full Scan (45 min)</button>
+        <button class="btn btn-secondary" id="customScan" data-i18n="scan_custom">Custom Scan</button>
+      </div>
+
+      <div class="card" id="scanProgress" style="display:none;">
+        <h3 id="scanTitle" data-i18n="scanning">Scanning...</h3>
+        <div class="scan-bar">
+          <div class="scan-bar-fill" id="scanFill" style="width: 0%"></div>
+        </div>
+        <div class="scan-info">
+          <span id="scanPercent">0%</span>
+          <span id="scanFiles">Files: 0</span>
+        </div>
+        <button class="btn btn-secondary" id="pauseScan" data-i18n="pause">Pause</button>
+      </div>
+
+      <div class="card" id="scanResults" style="display:none;">
+        <h3 data-i18n="scan_results">Scan Results</h3>
+        <div class="results-summary">
+          <div><strong id="resultFiles">0</strong> <span data-i18n="result_scanned">files scanned</span></div>
+          <div><strong id="resultThreats">0</strong> <span data-i18n="result_threats">threats found</span></div>
+          <div><strong id="resultTime">0s</strong> <span data-i18n="result_time">time elapsed</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- THREATS -->
+    <section class="section" id="threats">
+      <header class="section-header">
+        <h1 data-i18n="threats_title">Detected Threats</h1>
+        <p data-i18n="threats_desc">Manage and remove detected malware</p>
+      </header>
+
+      <div class="threats-list" id="threatsList">
+        <div class="threat-item critical">
+          <div class="threat-icon">🔴</div>
+          <div class="threat-info">
+            <div class="threat-name">Trojan.Generic.A</div>
+            <div class="threat-file">C:\Users\Admin\Downloads\file.exe</div>
+            <div class="threat-date">Detected: 2 hours ago</div>
+          </div>
+          <div class="threat-actions">
+            <button class="btn btn-danger" data-i18n="remove">Remove</button>
+            <button class="btn btn-secondary" data-i18n="details">Details</button>
+          </div>
+        </div>
+
+        <div class="threat-item warning">
+          <div class="threat-icon">🟡</div>
+          <div class="threat-info">
+            <div class="threat-name">PUP.Optional.Software</div>
+            <div class="threat-file">C:\Program Files\Unwanted\app.exe</div>
+            <div class="threat-date">Detected: 5 hours ago</div>
+          </div>
+          <div class="threat-actions">
+            <button class="btn btn-danger" data-i18n="remove">Remove</button>
+            <button class="btn btn-secondary" data-i18n="details">Details</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUARANTINE -->
+    <section class="section" id="quarantine">
+      <header class="section-header">
+        <h1 data-i18n="quarantine_title">Quarantine</h1>
+        <p data-i18n="quarantine_desc">Isolated threats and suspicious files</p>
+      </header>
+
+      <div class="quarantine-list" id="quarantineList">
+        <div class="quarantine-item">
+          <div class="quar-icon">🔒</div>
+          <div class="quar-info">
+            <div class="quar-name">Malware.Backdoor.B</div>
+            <div class="quar-file">malware_2024.bin</div>
+            <div class="quar-date">Quarantined: 3 days ago</div>
+          </div>
+          <div class="quar-actions">
+            <button class="btn btn-secondary" data-i18n="restore">Restore</button>
+            <button class="btn btn-danger" data-i18n="delete">Delete</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REPORTS -->
+    <section class="section" id="reports">
+      <header class="section-header">
+        <h1 data-i18n="reports_title">Reports</h1>
+        <p data-i18n="reports_desc">Detailed protection and activity history</p>
+      </header>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3 data-i18n="this_week">This Week</h3>
+          <div class="chart-simple">
+            <div class="chart-bar" style="height: 40%"></div>
+            <div class="chart-bar" style="height: 60%"></div>
+            <div class="chart-bar" style="height: 25%"></div>
+            <div class="chart-bar" style="height: 80%"></div>
+            <div class="chart-bar" style="height: 35%"></div>
+          </div>
+          <div class="chart-labels">
+            <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 data-i18n="threat_types">Threat Types</h3>
+          <div class="pie-chart">
+            <div class="pie-segment" style="--percent: 45; --color: #ff6b6b;"></div>
+            <div class="pie-segment" style="--percent: 30; --color: #ffa500;"></div>
+            <div class="pie-segment" style="--percent: 25; --color: #4ecdc4;"></div>
+          </div>
+          <div class="legend">
+            <div><span class="legend-dot" style="background: #ff6b6b;"></span> Malware</div>
+            <div><span class="legend-dot" style="background: #ffa500;"></span> PUP</div>
+            <div><span class="legend-dot" style="background: #4ecdc4;"></span> Other</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section class="section" id="settings">
+      <header class="section-header">
+        <h1 data-i18n="settings_title">Settings</h1>
+        <p data-i18n="settings_desc">Configure protection and preferences</p>
+      </header>
+
+      <div class="card">
+        <h3 data-i18n="scan_settings">Scan Settings</h3>
+        <div class="setting-item">
+          <div class="setting-label">
+            <span data-i18n="schedule_scans">Schedule automatic scans</span>
+            <span class="setting-desc">Daily at 2:00 AM</span>
+          </div>
+          <toggle-switch id="scheduleToggle"></toggle-switch>
+        </div>
+        <div class="setting-item">
+          <div class="setting-label">
+            <span data-i18n="scan_archives">Scan inside archives</span>
+          </div>
+          <toggle-switch id="archiveToggle" checked></toggle-switch>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 data-i18n="protection_settings">Protection Settings</h3>
+        <div class="setting-item">
+          <div class="setting-label">
+            <span data-i18n="realtime_scan">Real-time protection</span>
+          </div>
+          <toggle-switch id="realtimeToggle" checked></toggle-switch>
+        </div>
+        <div class="setting-item">
+          <div class="setting-label">
+            <span data-i18n="email_protect">Email scanning</span>
+          </div>
+          <toggle-switch id="emailToggle" checked></toggle-switch>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 data-i18n="advanced">Advanced</h3>
+        <div class="setting-item">
+          <div class="setting-label">
+            <span data-i18n="auto_update">Auto-update definitions</span>
+          </div>
+          <toggle-switch id="updateToggle" checked></toggle-switch>
+        </div>
+        <div class="setting-item">
+          <button class="btn btn-secondary" data-i18n="update_now">Update Now</button>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="i18n.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
