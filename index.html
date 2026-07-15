@@ -3,109 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reck Project | Next-Gen Software & Marketplace</title>
-    <!-- Tailwind CSS -->
+    <title>Synax Baba Project // Core System</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome İkonları -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts (Plus Jakarta & Orbitron Sinerjisi) -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;800;900&family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
-    
     <style>
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #050508;
-            overflow-x: hidden;
-        }
-        .font-orbitron {
-            font-family: 'Orbitron', sans-serif;
-        }
-
-        /* --- GELİŞMİŞ SİBERPUNK ANİMASYONLARI --- */
+        /* 150+ Animasyon Hissi İçin CSS Stacks */
+        @keyframes glitch { 0%{transform:skew(-1deg)} 50%{transform:skew(1deg)} 100%{transform:skew(0)} }
+        @keyframes scan { 0% {transform: translateY(-100%)} 100% {transform: translateY(100%)} }
+        @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-15px)} }
+        @keyframes pulse-neon { 0%,100%{box-shadow:0 0 5px #6366f1} 50%{box-shadow:0 0 20px #6366f1} }
         
-        /* 1. Mouse Takip Eden Neon Işık (PC için) */
-        #glow-cursor {
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, rgba(0,0,0,0) 70%);
-            border-radius: 50%;
-            position: fixed;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-            z-index: 1;
-            transition: transform 0.1s ease-out;
-            filter: blur(30px);
-            display: none; /* JS ile PC'de aktif edilecek */
-        }
+        body { background: #020202; color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        
+        /* Scanline Efekti */
+        .scanlines::before { content: ""; position: absolute; width: 100%; height: 2px; background: rgba(99, 102, 241, 0.1); animation: scan 4s linear infinite; pointer-events: none; }
 
-        /* 2. Kart Hover Efektleri (3D Tilt & Işıma) */
-        .cyber-card {
-            background: rgba(18, 19, 26, 0.65);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .cyber-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            border-color: rgba(168, 85, 247, 0.6);
-            box-shadow: 0 15px 30px rgba(168, 85, 247, 0.15), 0 0 10px rgba(168, 85, 247, 0.1);
-        }
+        /* Kartlar ve Elementler */
+        .card-tech { background: rgba(10, 10, 15, 0.8); border: 1px solid #1a1a2e; transition: 0.3s; }
+        .card-tech:hover { transform: translateY(-10px) scale(1.02); border-color: #6366f1; }
+        
+        .stagger-reveal { opacity: 0; transform: translateY(50px); transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .is-visible { opacity: 1; transform: translateY(0); }
 
-        /* 3. Ultra Akıcı Kayma Animasyonları (Scroll Reveal) */
-        .reveal-left {
-            opacity: 0;
-            transform: translateX(-50px);
-            transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-        .reveal-right {
-            opacity: 0;
-            transform: translateX(50px);
-            transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-        .reveal-up {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-        .revealed {
-            opacity: 1;
-            transform: translate(0) scale(1);
-        }
-
-        /* 4. Buton Neon Titreşimi (Glow Pulse) */
-        .neon-btn {
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-        .neon-btn::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: all 0.5s ease;
-        }
-        .neon-btn:hover::before {
-            left: 100%;
-        }
-        .neon-btn:hover {
-            box-shadow: 0 0 20px rgba(168, 85, 247, 0.6);
-        }
-
-        /* Arka plan siber grid deseni */
-        .grid-bg {
-            background-image: linear-gradient(rgba(168, 85, 247, 0.03) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(168, 85, 247, 0.03) 1px, transparent 1px);
-            background-size: 40px 40px;
-        }
+        /* Telegram Buton */
+        .tg-pulse { animation: pulse-neon 2s infinite; }
     </style>
 </head>
-<body class="text-gray-100 overflow-x-hidden grid-bg">
+<body class="scanlines">
 
-    <!-- Dinamik Takipçi Işık (PC'de harika durur) -->
-    <div id="glow-cursor"></div>
+    <!-- Header -->
+    <header class="fixed w-full z-50 p-6 flex justify-between items-center backdrop-blur-xl border-b border-indigo-900/30">
+        <div class="text-xl font-black tracking-tighter">SYNAX<span class="text-indigo-500">_BABA</span></div>
+        <a href="https://t.me/ReckOpssYonlendirme" target="_blank" class="tg-pulse px-6 py-2 bg-indigo-600 rounded-full text-xs font-bold hover:bg-indigo-500 transition-all">JOIN CHANNEL</a>
+    </header>
 
+    <!-- Hero Section -->
+    <section class="h-screen flex items-center justify-center relative overflow-hidden">
+        <!-- Hareketli arka plan ışıkları -->
+        <div class="absolute w-[500px] h-[500px] bg-indigo-900/20 rounded-full blur-[120px] animate-pulse"></div>
+        
+        <div class="text-center z-10 p-6">
+            <h1 class="text-6xl md:text-9xl font-black mb-6 tracking-tighter">
+                EXECUTE <span class="text-indigo-500">NULL</span>
+            </h1>
+            <p class="text-gray-500 text-sm md:text-lg max-w-lg mx-auto mb-10">
+                Synax Baba Project; kernel-level optimizasyon ve sistem entegrasyon çözümleri. Gereksiz hiçbir şey yok, sadece performans.
+            </p>
+            <div class="flex gap-4 justify-center">
+                <a href="#tech" class="px-8 py-3 bg-white text-black font-bold text-xs hover:bg-indigo-500 hover:text-white transition-all">SİSTEMİ İNCELE</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Grid (Burası 50 animasyon hissi veren yer) -->
+    <section id="tech" class="py-24 px-6 max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- Element 1 -->
+            <div class="card-tech p-8 stagger-reveal" style="transition-delay: 0.1s;">
+                <div class="text-indigo-500 text-2xl mb-4">01</div>
+                <h3 class="text-lg font-bold mb-2">Memory Latency</h3>
+                <p class="text-xs text-gray-400">Veri işleme süreçlerinde %0 gecikme mimarisi.</p>
+            </div>
+
+            <!-- Element 2 -->
+            <div class="card-tech p-8 stagger-reveal" style="transition-delay: 0.2s;">
+                <div class="text-indigo-500 text-2xl mb-4">02</div>
+                <h3 class="text-lg font-bold mb-2">Kernel Patching</h3>
+                <p class="text-xs text-gray-400">Sistem kararlılığını artıran düşük seviyeli modül.</p>
+            </div>
+
+            <!-- Element 3 -->
+            <div class="card-tech p-8 stagger-reveal" style="transition-delay: 0.3s;">
+                <div class="text-indigo-500 text-2xl mb-4">03</div>
+                <h3 class="text-lg font-bold mb-2">IO Optimization</h3>
+                <p class="text-xs text-gray-400">Girdi/Çıktı birimlerinde maksimum throughput.</p>
+            </div>
+            
+            <!-- Element 4 -->
+            <div class="card-tech p-8 stagger-reveal" style="transition-delay: 0.4s;">
+                <div class="text-indigo-500 text-2xl mb-4">04</div>
+                <h3 class="text-lg font-bold mb-2">Secure Routing</h3>
+                <p class="text-xs text-gray-400">Şifrelenmiş veri kanalları ve paket güvenliği.</p>
+            </div>
+
+            <!-- Element 5 -->
+            <div class="card-tech p-8 stagger-reveal" style="transition-delay: 0.5s;">
+                <div class="text-indigo-500 text-2xl mb-4">05</div>
+                <h3 class="text-lg font-bold mb-2">Buffer Integrity</h3>
+                <p class="text-xs text-gray-400">Memory leak önleyici ve buffer temizleyici.</p>
+            </div>
+
+            <!-- Element 6 -->
+            <div class="card-tech p-8 stagger-reveal" style="transition-delay: 0.6s;">
+                <div class="text-indigo-500 text-2xl mb-4">06</div>
+                <h3 class="text-lg font-bold mb-2">Core Threading</h3>
+                <p class="text-xs text-gray-400">CPU odaklı çoklu iş parçacığı yönetimi.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-20 text-center border-t border-indigo-900/20 text-indigo-500/50 text-[10px] tracking-widest uppercase">
+        Synax Baba Project // Est. 2026 // System Online
+    </footer>
+
+    <script>
+        // Scroll ile animasyonları tetikle
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, { threshold: 0.2 });
+
+        document.querySelectorAll('.stagger-reveal').forEach(el => observer.observe(el));
+        
+        // Mouse takip
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            document.body.style.backgroundPosition = `${x * 100}% ${y * 100}%`;
+        });
+    </script>
+</body>
+</html>
     <!-- HEADER (PC'de Geniş, Mobilde Minimal) -->
     <header class="fixed top-0 left-0 w-full z-50 bg-[#050508]/75 backdrop-blur-xl border-b border-white/5 px-6 md:px-12 py-5 flex justify-between items-center transition-all duration-300">
         <div class="text-2xl md:text-3xl font-orbitron font-black tracking-widest text-white">
