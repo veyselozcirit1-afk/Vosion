@@ -3,109 +3,208 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Synax Baba Project // Core System</title>
+    <title>Synax Baba Project</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* 150+ Animasyon Hissi İçin CSS Stacks */
-        @keyframes glitch { 0%{transform:skew(-1deg)} 50%{transform:skew(1deg)} 100%{transform:skew(0)} }
-        @keyframes scan { 0% {transform: translateY(-100%)} 100% {transform: translateY(100%)} }
-        @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-15px)} }
-        @keyframes pulse-neon { 0%,100%{box-shadow:0 0 5px #6366f1} 50%{box-shadow:0 0 20px #6366f1} }
-        
-        body { background: #020202; color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
-        
-        /* Scanline Efekti */
-        .scanlines::before { content: ""; position: absolute; width: 100%; height: 2px; background: rgba(99, 102, 241, 0.1); animation: scan 4s linear infinite; pointer-events: none; }
+        @keyframes cyber-glitch {
+            0% { clip-path: inset(40% 0 61% 0); transform: skew(0.3deg); }
+            20% { clip-path: inset(92% 0 1% 0); transform: skew(-0.5deg); }
+            40% { clip-path: inset(15% 0 80% 0); transform: skew(0.5deg); }
+            60% { clip-path: inset(80% 0 5% 0); transform: skew(-0.3deg); }
+            80% { clip-path: inset(3% 0 92% 0); transform: skew(0.8deg); }
+            100% { clip-path: inset(40% 0 61% 0); transform: skew(0); }
+        }
+        @keyframes flip-card {
+            0% { transform: perspective(1000px) rotateY(0deg); }
+            50% { transform: perspective(1000px) rotateY(180deg); }
+            100% { transform: perspective(1000px) rotateY(360deg); }
+        }
+        @keyframes background-pulse {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        @keyframes neon-shake {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            20% { transform: translate(-2px, 2px) rotate(-1deg); }
+            40% { transform: translate(2px, -2px) rotate(1deg); }
+            60% { transform: translate(-2px, -2px) rotate(-1deg); }
+            80% { transform: translate(2px, 2px) rotate(1deg); }
+        }
 
-        /* Kartlar ve Elementler */
-        .card-tech { background: rgba(10, 10, 15, 0.8); border: 1px solid #1a1a2e; transition: 0.3s; }
-        .card-tech:hover { transform: translateY(-10px) scale(1.02); border-color: #6366f1; }
-        
-        .stagger-reveal { opacity: 0; transform: translateY(50px); transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-        .is-visible { opacity: 1; transform: translateY(0); }
+        body {
+            background: radial-gradient(circle at center, #0f0c1b 0%, #030206 100%);
+            background-size: 200% 200%;
+            animation: background-pulse 10s ease infinite;
+            color: #fff;
+            font-family: 'Space Grotesk', sans-serif;
+            overflow-x: hidden;
+        }
 
-        /* Telegram Buton */
-        .tg-pulse { animation: pulse-neon 2s infinite; }
+        .shake-hover:hover {
+            animation: neon-shake 0.2s linear infinite;
+            box-shadow: 0 0 25px #6366f1, inset 0 0 10px #6366f1;
+            border-color: #818cf8;
+        }
+
+        .glitch-title {
+            position: relative;
+        }
+        .glitch-title::before, .glitch-title::after {
+            content: "SYNAX BABA";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #030206;
+        }
+        .glitch-title::before {
+            left: 2px;
+            text-shadow: -2px 0 #ff00c1;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: cyber-glitch 5s infinite linear alternate-reverse;
+        }
+        .glitch-title::after {
+            left: -2px;
+            text-shadow: -2px 0 #00fff9, 0 2px #ff00c1;
+            clip: rect(85px, 450px, 140px, 0);
+            animation: cyber-glitch 5s infinite linear alternate-reverse;
+        }
+
+        .flip-hover:hover {
+            animation: flip-card 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        .grid-tech {
+            background-image: linear-gradient(rgba(99, 102, 241, 0.05) 1.5px, transparent 1.5px),
+                              linear-gradient(90deg, rgba(99, 102, 241, 0.05) 1.5px, transparent 1.5px);
+            background-size: 30px 30px;
+        }
+
+        .glow-node {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+            transform: translate(-50%, -50%);
+            transition: transform 0.05s ease-out;
+        }
+
+        .reveal-card {
+            opacity: 0;
+            transform: translateY(100px) rotateX(45deg);
+            transition: all 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+        .reveal-card.active {
+            opacity: 1;
+            transform: translateY(0) rotateX(0deg);
+        }
     </style>
 </head>
-<body class="scanlines">
+<body class="grid-tech min-h-screen pb-12">
 
-    <!-- Header -->
-    <header class="fixed w-full z-50 p-6 flex justify-between items-center backdrop-blur-xl border-b border-indigo-900/30">
-        <div class="text-xl font-black tracking-tighter">SYNAX<span class="text-indigo-500">_BABA</span></div>
-        <a href="https://t.me/ReckOpssYonlendirme" target="_blank" class="tg-pulse px-6 py-2 bg-indigo-600 rounded-full text-xs font-bold hover:bg-indigo-500 transition-all">JOIN CHANNEL</a>
+    <div id="mouse-glow" class="glow-node"></div>
+
+    <header class="fixed w-full z-50 px-6 py-4 flex justify-between items-center backdrop-blur-md border-b border-indigo-900/30 bg-black/40">
+        <div class="text-xl font-black tracking-widest text-white">
+            SYNAX<span class="text-indigo-500">_BABA</span>
+        </div>
+        <a href="https://t.me/ReckOpssYonlendirme" target="_blank" class="shake-hover px-6 py-2.5 bg-indigo-600 border border-indigo-400 rounded-lg text-xs font-bold tracking-widest transition-all">
+            TELEGRAM KANALI
+        </a>
     </header>
 
-    <!-- Hero Section -->
-    <section class="h-screen flex items-center justify-center relative overflow-hidden">
-        <!-- Hareketli arka plan ışıkları -->
-        <div class="absolute w-[500px] h-[500px] bg-indigo-900/20 rounded-full blur-[120px] animate-pulse"></div>
-        
-        <div class="text-center z-10 p-6">
-            <h1 class="text-6xl md:text-9xl font-black mb-6 tracking-tighter">
-                EXECUTE <span class="text-indigo-500">NULL</span>
+    <section class="h-screen flex flex-col items-center justify-center text-center px-6 relative">
+        <div class="space-y-4 max-w-4xl z-10">
+            <span class="inline-block text-[10px] uppercase bg-indigo-950/80 border border-indigo-500/40 text-indigo-300 px-4 py-1.5 rounded-full tracking-[0.2em] animate-pulse">
+                SYS_STATUS: OPERATIONAL
+            </span>
+            <h1 class="glitch-title text-5xl md:text-8xl font-black tracking-tighter text-white">
+                SYNAX BABA
             </h1>
-            <p class="text-gray-500 text-sm md:text-lg max-w-lg mx-auto mb-10">
-                Synax Baba Project; kernel-level optimizasyon ve sistem entegrasyon çözümleri. Gereksiz hiçbir şey yok, sadece performans.
+            <p class="text-gray-400 text-sm md:text-base max-w-md mx-auto py-2">
+                Sıradanlığı unutun. Kernel optimizasyonu ve gelişmiş bellek kontrol üniteleriyle performansı zirveye taşıyın.
             </p>
-            <div class="flex gap-4 justify-center">
-                <a href="#tech" class="px-8 py-3 bg-white text-black font-bold text-xs hover:bg-indigo-500 hover:text-white transition-all">SİSTEMİ İNCELE</a>
+            <div class="pt-4">
+                <a href="#solutions" class="shake-hover px-10 py-4 bg-indigo-600 border border-indigo-400 rounded-xl font-black text-xs uppercase tracking-[0.15em] transition-all">
+                    SİSTEME GİRİŞ YAP
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Tech Grid (Burası 50 animasyon hissi veren yer) -->
-    <section id="tech" class="py-24 px-6 max-w-6xl mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <section id="solutions" class="py-12 px-6 max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             
-            <!-- Element 1 -->
-            <div class="card-tech p-8 stagger-reveal" style="transition-delay: 0.1s;">
-                <div class="text-indigo-500 text-2xl mb-4">01</div>
-                <h3 class="text-lg font-bold mb-2">Memory Latency</h3>
-                <p class="text-xs text-gray-400">Veri işleme süreçlerinde %0 gecikme mimarisi.</p>
+            <div class="reveal-card flip-hover bg-[#0b0a11]/90 border border-indigo-900/40 p-8 rounded-2xl relative overflow-hidden group cursor-pointer" style="transition-delay: 0.1s;">
+                <div class="absolute top-0 right-0 w-24 h-24 bg-indigo-500/10 rounded-full blur-2xl group-hover:bg-indigo-500/30 transition-all"></div>
+                <div class="text-indigo-400 text-4xl mb-6"><i class="fa-solid fa-microchip"></i></div>
+                <h3 class="text-xl font-bold mb-2 tracking-wide">01 // CORE ENGINE</h3>
+                <p class="text-xs text-gray-400 leading-relaxed">Derin iş parçacığı yönetimi ve özel mikroişlemci mimarisi ile kusursuz çalışma.</p>
             </div>
 
-            <!-- Element 2 -->
-            <div class="card-tech p-8 stagger-reveal" style="transition-delay: 0.2s;">
-                <div class="text-indigo-500 text-2xl mb-4">02</div>
-                <h3 class="text-lg font-bold mb-2">Kernel Patching</h3>
-                <p class="text-xs text-gray-400">Sistem kararlılığını artıran düşük seviyeli modül.</p>
+            <div class="reveal-card flip-hover bg-[#0b0a11]/90 border border-indigo-900/40 p-8 rounded-2xl relative overflow-hidden group cursor-pointer" style="transition-delay: 0.2s;">
+                <div class="absolute top-0 right-0 w-24 h-24 bg-indigo-500/10 rounded-full blur-2xl group-hover:bg-indigo-500/30 transition-all"></div>
+                <div class="text-indigo-400 text-4xl mb-6"><i class="fa-solid fa-shield-halved"></i></div>
+                <h3 class="text-xl font-bold mb-2 tracking-wide">02 // CYBER GUARD</h3>
+                <p class="text-xs text-gray-400 leading-relaxed">İmza tabanlı koruma kalkanları ve gerçek zamanlı işlem doğrulama.</p>
             </div>
 
-            <!-- Element 3 -->
-            <div class="card-tech p-8 stagger-reveal" style="transition-delay: 0.3s;">
-                <div class="text-indigo-500 text-2xl mb-4">03</div>
-                <h3 class="text-lg font-bold mb-2">IO Optimization</h3>
-                <p class="text-xs text-gray-400">Girdi/Çıktı birimlerinde maksimum throughput.</p>
-            </div>
-            
-            <!-- Element 4 -->
-            <div class="card-tech p-8 stagger-reveal" style="transition-delay: 0.4s;">
-                <div class="text-indigo-500 text-2xl mb-4">04</div>
-                <h3 class="text-lg font-bold mb-2">Secure Routing</h3>
-                <p class="text-xs text-gray-400">Şifrelenmiş veri kanalları ve paket güvenliği.</p>
+            <div class="reveal-card flip-hover bg-[#0b0a11]/90 border border-indigo-900/40 p-8 rounded-2xl relative overflow-hidden group cursor-pointer" style="transition-delay: 0.3s;">
+                <div class="absolute top-0 right-0 w-24 h-24 bg-indigo-500/10 rounded-full blur-2xl group-hover:bg-indigo-500/30 transition-all"></div>
+                <div class="text-indigo-400 text-4xl mb-6"><i class="fa-solid fa-gauge-high"></i></div>
+                <h3 class="text-xl font-bold mb-2 tracking-wide">03 // LATENCY ULTRA</h3>
+                <p class="text-xs text-gray-400 leading-relaxed">Arabellek temizleyici ve anlık girdi optimizasyon modülleri.</p>
             </div>
 
-            <!-- Element 5 -->
-            <div class="card-tech p-8 stagger-reveal" style="transition-delay: 0.5s;">
-                <div class="text-indigo-500 text-2xl mb-4">05</div>
-                <h3 class="text-lg font-bold mb-2">Buffer Integrity</h3>
-                <p class="text-xs text-gray-400">Memory leak önleyici ve buffer temizleyici.</p>
+            <div class="reveal-card flip-hover bg-[#0b0a11]/90 border border-indigo-900/40 p-8 rounded-2xl relative overflow-hidden group cursor-pointer" style="transition-delay: 0.4s;">
+                <div class="absolute top-0 right-0 w-24 h-24 bg-indigo-500/10 rounded-full blur-2xl group-hover:bg-indigo-500/30 transition-all"></div>
+                <div class="text-indigo-400 text-4xl mb-6"><i class="fa-solid fa-network-wired"></i></div>
+                <h3 class="text-xl font-bold mb-2 tracking-wide">04 // NETWORK FLOW</h3>
+                <p class="text-xs text-gray-400 leading-relaxed">Giden paket trafiğini optimize eden akıllı yönlendirme protokolü.</p>
             </div>
 
-            <!-- Element 6 -->
-            <div class="card-tech p-8 stagger-reveal" style="transition-delay: 0.6s;">
-                <div class="text-indigo-500 text-2xl mb-4">06</div>
-                <h3 class="text-lg font-bold mb-2">Core Threading</h3>
-                <p class="text-xs text-gray-400">CPU odaklı çoklu iş parçacığı yönetimi.</p>
+            <div class="reveal-card flip-hover bg-[#0b0a11]/90 border border-indigo-900/40 p-8 rounded-2xl relative overflow-hidden group cursor-pointer" style="transition-delay: 0.5s;">
+                <div class="absolute top-0 right-0 w-24 h-24 bg-indigo-500/10 rounded-full blur-2xl group-hover:bg-indigo-500/30 transition-all"></div>
+                <div class="text-indigo-400 text-4xl mb-6"><i class="fa-solid fa-cube"></i></div>
+                <h3 class="text-xl font-bold mb-2 tracking-wide">05 // BUFFER INTEGRITY</h3>
+                <p class="text-xs text-gray-400 leading-relaxed">Hafıza sızıntılarını gerçek zamanlı onaran dinamik bellek arayüzü.</p>
+            </div>
+
+            <div class="reveal-card flip-hover bg-[#0b0a11]/90 border border-indigo-900/40 p-8 rounded-2xl relative overflow-hidden group cursor-pointer" style="transition-delay: 0.6s;">
+                <div class="absolute top-0 right-0 w-24 h-24 bg-indigo-500/10 rounded-full blur-2xl group-hover:bg-indigo-500/30 transition-all"></div>
+                <div class="text-indigo-400 text-4xl mb-6"><i class="fa-solid fa-terminal"></i></div>
+                <h3 class="text-xl font-bold mb-2 tracking-wide">06 // SHELL CONSOLE</h3>
+                <p class="text-xs text-gray-400 leading-relaxed">Sistem mühendisleri için özelleştirilebilir terminal otomasyonları.</p>
             </div>
 
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="py-20 text-center border-t border-indigo-900/20 text-indigo-500/50 text-[10px] tracking-widest uppercase">
-        Synax Baba Project // Est. 2026 // System Online
+    <script>
+        const glow = document.getElementById('mouse-glow');
+        document.addEventListener('mousemove', (e) => {
+            if (window.innerWidth > 768) {
+                glow.style.left = e.clientX + 'px';
+                glow.style.top = e.clientY + 'px';
+            }
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal-card').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
     </footer>
 
     <script>
