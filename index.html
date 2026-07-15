@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>upVirüS — Play & Build</title>
+<meta name="description" content="upVirüS — BoxPvP, BoxMining, Skyblock, KitPvP. Gücün kaça çıkıyor bakalım.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="grain"></div>
+
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand">
+      <span class="brand-mark">⚡</span>
+      <span class="brand-text">upVirüS<span class="brand-sub">NETWORK</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#modlar">Modlar</a>
+      <a href="#durum">Sunucu</a>
+      <a href="#katil">Discord</a>
+    </nav>
+    <button class="nav-ip" id="navIpBtn">
+      <span class="dot" id="navDot"></span>
+      play.upvirus.net
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">GÜCÜN KAÇA ÇIKIYOR?</p>
+        <h1 class="headline">
+          SAVAŞ,<br>
+          <span class="hl-2">KAZI,</span><br>
+          <span class="hl-3">KAZ.</span>
+        </h1>
+        <p class="sub">BoxPvP, BoxMining, Skyblock ve KitPvP tek sunucuda. Mobil, PC, fark etmiyor — upVirüS hep açık, sen hazırsan?</p>
+
+        <div class="ip-box">
+          <div class="ip-box-label">SUNUCU ADRESİ</div>
+          <div class="ip-box-row">
+            <code class="ip-value" id="ipValue">play.upvirus.net</code>
+            <button class="copy-btn" id="copyBtn">
+              <span id="copyBtnText">Kopyala</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="hero-ctas">
+          <a href="#katil" class="btn btn-primary">Discord'a Katıl</a>
+          <a href="#modlar" class="btn btn-ghost">Modları Gör ↓</a>
+        </div>
+      </div>
+
+      <div class="hud" id="hud">
+        <div class="hud-top">
+          <span class="hud-title">SUNUCU.DURUM</span>
+          <span class="hud-status" id="hudStatusBadge">
+            <span class="hud-status-dot" id="hudDot"></span>
+            <span id="hudStatusText">SORGULANIYOR</span>
+          </span>
+        </div>
+        <div class="hud-body" id="hudBody">
+          <div class="hud-row"><span>host</span><span id="hudHost">play.upvirus.net</span></div>
+          <div class="hud-row"><span>oyuncular</span><span id="hudPlayers">—</span></div>
+          <div class="hud-row"><span>sürüm</span><span id="hudVersion">—</span></div>
+          <div class="hud-row"><span>motd</span><span id="hudMotd">—</span></div>
+          <div class="hud-row"><span>gecikme</span><span id="hudPing">—</span></div>
+        </div>
+        <div class="hud-foot">canlı veri · api.mcsrvstat.us</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GAME MODES -->
+  <section class="modes" id="modlar">
+    <div class="section-head">
+      <p class="eyebrow">OYUNIŞ</p>
+      <h2>Dört mod. Sınırsız eğlence.</h2>
+    </div>
+
+    <div class="mode-grid">
+      <article class="mode-card">
+        <div class="mode-icon mode-icon--box" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><path d="M24 4 L44 15 L44 33 L24 44 L4 33 L4 15 Z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M24 4 L24 24 M24 24 L44 15 M24 24 L4 15 M24 24 L24 44" stroke="currentColor" stroke-width="2"/></svg>
+        </div>
+        <h3>BoxPvP</h3>
+        <p>Kaz, güçlen, savaş. Sınırlı alan, sınırsız güç. En iyi kim bakalım?</p>
+      </article>
+
+      <article class="mode-card">
+        <div class="mode-icon mode-icon--box" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><path d="M24 4 L44 15 L44 33 L24 44 L4 33 L4 15 Z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M24 4 L24 24 M24 24 L44 15 M24 24 L4 15 M24 24 L24 44" stroke="currentColor" stroke-width="2"/></svg>
+        </div>
+        <h3>BoxMining</h3>
+        <p>Kazı başlat, vur, çık. Kaynak tükeniyor — hızlı ol, yavaş kalanı geçer.</p>
+      </article>
+
+      <article class="mode-card">
+        <div class="mode-icon mode-icon--sky" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><ellipse cx="24" cy="30" rx="16" ry="6" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 30 Q10 40 24 40 Q38 40 38 30" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="14" r="4" fill="currentColor"/></svg>
+        </div>
+        <h3>Skyblock</h3>
+        <p>Bir ada, bir rüya. Ekonomini kur, adamı büyüt, sıralamaya tırman.</p>
+      </article>
+
+      <article class="mode-card">
+        <div class="mode-icon mode-icon--kit" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><path d="M8 40 L28 20 M28 20 L24 16 L34 6 L42 14 L32 24 L28 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>KitPvP</h3>
+        <p>Kiti seç, arenaya gir, kazan. Mesafe yok, sadece tepki ve yetenek.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- STATS STRIP -->
+  <section class="stats">
+    <div class="stat"><span class="stat-num">1M+</span><span class="stat-label">Kaz yapıldı</span></div>
+    <div class="stat"><span class="stat-num">4</span><span class="stat-label">Oyun modu</span></div>
+    <div class="stat"><span class="stat-num">24/7</span><span class="stat-label">Açık</span></div>
+    <div class="stat"><span class="stat-num">∞</span><span class="stat-label">Savaş</span></div>
+  </section>
+
+  <!-- CTA / DISCORD -->
+  <section class="cta" id="katil">
+    <div class="cta-inner">
+      <p class="eyebrow">TOPLULUĞA KATIL</p>
+      <h2>upVirüS'te yerini al.</h2>
+      <p class="sub">Discord sunucusunda takım kur, turnuvaya katıl, arkadaş edin. Sorularını sor, desteği al, oyun oyna.</p>
+      <div class="hero-ctas">
+        <a href="#" class="btn btn-primary" id="discordBtn">Discord'a Git</a>
+        <button class="btn btn-ghost" id="copyBtn2">IP'yi Kopyala</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="brand brand--footer">
+      <span class="brand-mark">⚡</span>
+      <span class="brand-text">upVirüS<span class="brand-sub">NETWORK</span></span>
+    </div>
+    <p>© <span id="year"></span> upVirüS. Gücü sende.</p>
+  </div>
+</footer>
+
+<div class="toast" id="toast">IP kopyalandı</div>
+
+<script src="script.js"></script>
+</body>
+</html>
