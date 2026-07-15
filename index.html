@@ -1,10 +1,353 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr" class="scroll-smooth">
 <head>
-    <title>Sitem</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reck Project | Next-Gen Software & Marketplace</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome İkonları -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts (Plus Jakarta & Orbitron Sinerjisi) -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;800;900&family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #050508;
+            overflow-x: hidden;
+        }
+        .font-orbitron {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        /* --- GELİŞMİŞ SİBERPUNK ANİMASYONLARI --- */
+        
+        /* 1. Mouse Takip Eden Neon Işık (PC için) */
+        #glow-cursor {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            position: fixed;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 1;
+            transition: transform 0.1s ease-out;
+            filter: blur(30px);
+            display: none; /* JS ile PC'de aktif edilecek */
+        }
+
+        /* 2. Kart Hover Efektleri (3D Tilt & Işıma) */
+        .cyber-card {
+            background: rgba(18, 19, 26, 0.65);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .cyber-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: rgba(168, 85, 247, 0.6);
+            box-shadow: 0 15px 30px rgba(168, 85, 247, 0.15), 0 0 10px rgba(168, 85, 247, 0.1);
+        }
+
+        /* 3. Ultra Akıcı Kayma Animasyonları (Scroll Reveal) */
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .revealed {
+            opacity: 1;
+            transform: translate(0) scale(1);
+        }
+
+        /* 4. Buton Neon Titreşimi (Glow Pulse) */
+        .neon-btn {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .neon-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.5s ease;
+        }
+        .neon-btn:hover::before {
+            left: 100%;
+        }
+        .neon-btn:hover {
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.6);
+        }
+
+        /* Arka plan siber grid deseni */
+        .grid-bg {
+            background-image: linear-gradient(rgba(168, 85, 247, 0.03) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(168, 85, 247, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+    </style>
 </head>
-<body>
-    <h1>Merhaba, bu benim ilk sitem!</h1>
-    <p>Vercel üzerinden yayına aldım.</p>
+<body class="text-gray-100 overflow-x-hidden grid-bg">
+
+    <!-- Dinamik Takipçi Işık (PC'de harika durur) -->
+    <div id="glow-cursor"></div>
+
+    <!-- HEADER (PC'de Geniş, Mobilde Minimal) -->
+    <header class="fixed top-0 left-0 w-full z-50 bg-[#050508]/75 backdrop-blur-xl border-b border-white/5 px-6 md:px-12 py-5 flex justify-between items-center transition-all duration-300">
+        <div class="text-2xl md:text-3xl font-orbitron font-black tracking-widest text-white">
+            RECK<span class="text-purple-500 animate-pulse">_PROJECT</span>
+        </div>
+        
+        <!-- PC Menü -->
+        <nav class="hidden md:flex items-center space-x-8 font-semibold text-sm tracking-wider">
+            <a href="#home" class="hover:text-purple-500 transition-colors duration-200">ANA SAYFA</a>
+            <a href="#store" class="hover:text-purple-500 transition-colors duration-200">MAĞAZA</a>
+            <a href="#features" class="hover:text-purple-500 transition-colors duration-200">AVANTAJLAR</a>
+            <a href="#stats" class="hover:text-purple-500 transition-colors duration-200">İSTATİSTİKLER</a>
+        </nav>
+
+        <div class="hidden md:flex items-center space-x-4">
+            <a href="#store" class="neon-btn bg-purple-600 text-white text-xs font-bold px-6 py-2.5 rounded-lg border border-purple-400/30">
+                GİRİŞ YAP
+            </a>
+        </div>
+
+        <!-- Mobil Hamburger -->
+        <button id="menu-btn" class="md:hidden text-white text-2xl focus:outline-none">
+            <i class="fa-solid fa-bars-staggered text-purple-500"></i>
+        </button>
+    </header>
+
+    <!-- MOBİL MENÜ (Slide-in) -->
+    <div id="mobile-menu" class="fixed inset-0 bg-[#050508]/98 z-50 translate-x-full transition-transform duration-500 ease-in-out flex flex-col justify-center items-center space-y-8 text-xl font-orbitron tracking-widest">
+        <button id="close-btn" class="absolute top-6 right-6 text-white text-3xl">
+            <i class="fa-solid fa-xmark text-purple-500"></i>
+        </button>
+        <a href="#home" class="hover:text-purple-500 transition">ANA SAYFA</a>
+        <a href="#store" class="hover:text-purple-500 transition">MAĞAZA</a>
+        <a href="#features" class="hover:text-purple-500 transition">AVANTAJLAR</a>
+        <a href="#stats" class="hover:text-purple-500 transition">İSTATİSTİKLER</a>
+    </div>
+
+    <!-- HERO SECTION (Havada Süzülen Elementler) -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center px-6 pt-24 overflow-hidden">
+        <div class="max-w-6xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center z-10">
+            
+            <!-- Sol Taraf Metinler (PC'de soldan süzülerek gelir) -->
+            <div class="reveal-left text-center md:text-left space-y-6">
+                <div class="inline-flex items-center gap-2 bg-purple-950/40 text-purple-400 text-xs font-semibold px-4 py-1.5 rounded-full border border-purple-500/30 tracking-widest uppercase">
+                    <span class="w-2 h-2 rounded-full bg-green-500 animate-ping"></span> Korumalar Devre Dışı
+                </div>
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-orbitron font-black text-white leading-none">
+                    OYUNUN <br>
+                    <span class="bg-gradient-to-r from-purple-400 via-fuchsia-500 to-indigo-500 bg-clip-text text-transparent">KURALINI YAZ</span>
+                </h1>
+                <p class="text-gray-400 text-sm md:text-base max-w-md leading-relaxed">
+                    Yapay zeka şablonlarından arındırılmış, üst düzey güvenlik odaklı hile arayüzü ve güvenli ticaret havuzu. Reck Project ile sınırları sen belirlersin.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                    <a href="#store" class="neon-btn bg-purple-600 text-white font-bold py-4 px-8 rounded-xl transition duration-300 text-center text-sm tracking-wider">
+                        PAZARI KEŞFET <i class="fa-solid fa-arrow-trend-up ml-2"></i>
+                    </a>
+                    <a href="#sell" class="bg-white/5 hover:bg-white/10 text-white font-bold py-4 px-8 rounded-xl border border-white/10 transition duration-300 text-center text-sm tracking-wider">
+                        İLAN OLUŞTUR
+                    </a>
+                </div>
+            </div>
+
+            <!-- Sağ Taraf Hareketli 3D Görünümlü Kart Mockup (PC'de sağdan gelir) -->
+            <div class="reveal-right flex justify-center items-center relative">
+                <!-- Arka plan renkli patlama -->
+                <div class="absolute w-72 h-72 bg-purple-600/20 rounded-full filter blur-[80px] -z-10 animate-pulse"></div>
+                
+                <!-- Siber Konsol Kartı (Hover edildiğinde 3D tilt efekti hissi verir) -->
+                <div class="cyber-card w-full max-w-sm rounded-2xl p-6 border border-white/10 relative overflow-hidden">
+                    <div class="flex justify-between items-center mb-6">
+                        <div class="flex space-x-1.5">
+                            <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                            <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+                            <span class="w-3 h-3 rounded-full bg-green-500"></span>
+                        </div>
+                        <span class="text-xs font-orbitron text-purple-400 tracking-wider">RECK_BYPASS_V4.exe</span>
+                    </div>
+                    <div class="bg-black/50 rounded-lg p-4 font-mono text-xs text-green-400 space-y-2 border border-white/5 mb-4">
+                        <p>> Initializing bypass system...</p>
+                        <p class="text-purple-400">> Hooking game process... [OK]</p>
+                        <p>> Status: <span class="text-green-500 font-bold animate-pulse">UNDETECTED</span></p>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-gray-500">Güvenlik Seviyesi</span>
+                        <span class="text-xs bg-purple-500/20 text-purple-300 px-2.5 py-0.5 rounded-full border border-purple-500/30">Maksimum</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- İSTATİSTİKLER (Sayı Sayma Animasyonu Eklenebilir) -->
+    <section id="stats" class="py-16 border-y border-white/5 bg-[#08080c]/50">
+        <div class="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div class="reveal-up space-y-2">
+                <h3 class="text-3xl md:text-4xl font-orbitron font-extrabold text-white">15K+</h3>
+                <p class="text-xs md:text-sm text-gray-500 uppercase tracking-widest">Başarılı Satış</p>
+            </div>
+            <div class="reveal-up space-y-2">
+                <h3 class="text-3xl md:text-4xl font-orbitron font-extrabold text-purple-500">24/7</h3>
+                <p class="text-xs md:text-sm text-gray-500 uppercase tracking-widest">Aktif Destek</p>
+            </div>
+            <div class="reveal-up space-y-2">
+                <h3 class="text-3xl md:text-4xl font-orbitron font-extrabold text-white">0%</h3>
+                <p class="text-xs md:text-sm text-gray-500 uppercase tracking-widest">Ban Riski (VIP)</p>
+            </div>
+            <div class="reveal-up space-y-2">
+                <h3 class="text-3xl md:text-4xl font-orbitron font-extrabold text-purple-500">2 Milyon+</h3>
+                <p class="text-xs md:text-sm text-gray-500 uppercase tracking-widest">İşlem Hacmi</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAĞAZA (İlan Kartları - Hover Efektli) -->
+    <section id="store" class="py-24 px-6 max-w-6xl mx-auto">
+        <div class="reveal-up mb-16 text-center md:text-left flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div>
+                <span class="text-xs font-orbitron text-purple-500 tracking-widest uppercase">Premium Pazar</span>
+                <h2 class="text-3xl md:text-4xl font-orbitron font-black text-white mt-1">GÜNCEL YAZILIMLAR</h2>
+            </div>
+            <p class="text-gray-400 text-sm max-w-xs">
+                Sistemimizdeki tüm ilanlar otomatik kontrol edilmekte ve güncellenmektedir.
+            </p>
+        </div>
+
+        <!-- Ürün Kartları Grid Yapısı -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <!-- Kart 1 -->
+            <div class="cyber-card rounded-2xl p-6 reveal-up relative overflow-hidden">
+                <div class="flex justify-between items-start mb-6">
+                    <span class="bg-green-500/10 text-green-400 text-xs font-bold px-3 py-1 rounded-md border border-green-500/20 font-orbitron">ACTIVE</span>
+                    <span class="text-sm font-semibold text-purple-400">FPS</span>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">Reck Apex Elite</h3>
+                <p class="text-gray-400 text-xs mb-6 leading-relaxed">Aimbot, ESP, Recoil Control ve HWID Spoofer entegreli komple paket.</p>
+                <div class="flex justify-between items-center border-t border-white/5 pt-4">
+                    <div>
+                        <span class="text-[10px] text-gray-500 block uppercase">Fiyat</span>
+                        <span class="text-xl font-extrabold text-white">₺250 <span class="text-xs font-normal text-gray-400">/ haftalık</span></span>
+                    </div>
+                    <button class="neon-btn bg-purple-600 text-white text-xs font-bold px-4 py-2.5 rounded-lg">Satın Al</button>
+                </div>
+            </div>
+
+            <!-- Kart 2 -->
+            <div class="cyber-card rounded-2xl p-6 reveal-up relative overflow-hidden">
+                <div class="flex justify-between items-start mb-6">
+                    <span class="bg-green-500/10 text-green-400 text-xs font-bold px-3 py-1 rounded-md border border-green-500/20 font-orbitron">ACTIVE</span>
+                    <span class="text-sm font-semibold text-purple-400">ROBLOX</span>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">Reck Blox Multi-Executor</h3>
+                <p class="text-gray-400 text-xs mb-6 leading-relaxed">Tüm güncel scriptleri sorunsuz çalıştırabilen, çökmeyen özel mobil & PC executor.</p>
+                <div class="flex justify-between items-center border-t border-white/5 pt-4">
+                    <div>
+                        <span class="text-[10px] text-gray-500 block uppercase">Fiyat</span>
+                        <span class="text-xl font-extrabold text-white">₺120 <span class="text-xs font-normal text-gray-400">/ aylık</span></span>
+                    </div>
+                    <button class="neon-btn bg-purple-600 text-white text-xs font-bold px-4 py-2.5 rounded-lg">Satın Al</button>
+                </div>
+            </div>
+
+            <!-- Kart 3 -->
+            <div class="cyber-card rounded-2xl p-6 reveal-up relative overflow-hidden">
+                <div class="flex justify-between items-start mb-6">
+                    <span class="bg-blue-500/10 text-blue-400 text-xs font-bold px-3 py-1 rounded-md border border-blue-500/20 font-orbitron">HESAP</span>
+                    <span class="text-sm font-semibold text-purple-400">VALORANT</span>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">Random Skinli Hesaplar</h3>
+                <p class="text-gray-400 text-xs mb-6 leading-relaxed">En az 20-100 arası skin garantili, ilk e-posta teslimatlı TR hesaplar.</p>
+                <div class="flex justify-between items-center border-t border-white/5 pt-4">
+                    <div>
+                        <span class="text-[10px] text-gray-500 block uppercase">Fiyat</span>
+                        <span class="text-xl font-extrabold text-white">₺180 <span class="text-xs font-normal text-gray-400">/ tek sefer</span></span>
+                    </div>
+                    <button class="neon-btn bg-purple-600 text-white text-xs font-bold px-4 py-2.5 rounded-lg">Satın Al</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-12 border-t border-white/5 bg-[#030305] text-center text-xs text-gray-600">
+        <p class="mb-2 font-orbitron tracking-widest text-gray-400">© 2026 RECK PROJECT. ALL RIGHTS RESERVED.</p>
+        <p>This software is developed strictly for educational/testing purposes.</p>
+    </footer>
+
+    <!-- JS ENTEGRASYONU VE ULTRA ANIMASYONLAR -->
+    <script>
+        // 1. Mouse Takip Eden Neon Glow (PC için özel, mobilde çalışmaz ve kasmayı önler)
+        const glowCursor = document.getElementById('glow-cursor');
+        
+        // Cihaz algılama (PC ise cursor animasyonunu aktif et)
+        if (window.innerWidth > 768) {
+            glowCursor.style.display = 'block';
+            document.addEventListener('mousemove', (e) => {
+                glowCursor.style.left = e.clientX + 'px';
+                glowCursor.style.top = e.clientY + 'px';
+            });
+        }
+
+        // 2. Mobil Hamburger Menü Kontrolleri
+        const menuBtn = document.getElementById('menu-btn');
+        const closeBtn = document.getElementById('close-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('translate-x-full');
+        });
+
+        closeBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('translate-x-full');
+        });
+
+        // Linklere tıklandığında menüyü kapat
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('translate-x-full');
+            });
+        });
+
+        // 3. Scroll Reveal (Aşağı kaydırdıkça havadan uçarak gelen kartlar)
+        const revealElements = () => {
+            const reveals = document.querySelectorAll('.reveal-left, .reveal-right, .reveal-up');
+            const windowHeight = window.innerHeight;
+
+            reveals.forEach(el => {
+                const elementTop = el.getBoundingClientRect().top;
+                const elementVisible = 120; // 120px kala animasyonu tetikle
+
+                if (elementTop < windowHeight - elementVisible) {
+                    el.classList.add('revealed');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealElements);
+        // İlk yüklemede de çalıştır
+        window.addEventListener('load', revealElements);
+    </script>
 </body>
 </html>
